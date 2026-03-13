@@ -3,6 +3,7 @@ const logger = require('./middleware/logger');
 const errorHandler = require('./middleware/errorHandler');
 const itemsRouter = require('./routes/items');
 const categoriesRouter = require('./routes/categories');
+const inventoryRouter = require('./routes/inventory');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -14,6 +15,7 @@ app.use(logger);
 // Routes
 app.use('/api/items', itemsRouter);
 app.use('/api/categories', categoriesRouter);
+app.use('/api/inventory', inventoryRouter);
 
 // Health check
 app.get('/health', (req, res) => {

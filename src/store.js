@@ -13,6 +13,19 @@ const store = {
     getById(id) {
       return items.get(id) || null;
     },
+    /**
+     * Returns all items where quantity <= reorderLevel.
+     * Items with no reorderLevel (null/undefined) are excluded.
+     * @returns {Array} Array of low-stock inventory items
+     */
+    getLowStock() {
+      return Array.from(items.values()).filter(
+        (item) =>
+          item.reorderLevel !== null &&
+          item.reorderLevel !== undefined &&
+          item.quantity <= item.reorderLevel
+      );
+    },
     create(data) {
       const id = nextItemId++;
       const item = { id, ...data, created_at: new Date().toISOString() };
